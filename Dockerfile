@@ -18,9 +18,9 @@ RUN apt-get update \
 WORKDIR /app
 
 # Install Python dependencies
-RUN pip install --upgrade pip
 COPY ./requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt
 
 # Copy the project files
 COPY ./zospital-Api /app
@@ -28,6 +28,13 @@ COPY ./zospital-Api /app
 # Copy credentials.json
 COPY ./credentials.json /app/credentials.json
 
-# Copy entrypoint script
-COPY ./entrypoint.sh /
-ENTRYPOINT ["sh", "/entrypoint.sh"]
+# Copy entrypoint script and ensure it has execution permissions
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENV PORT 8000
+# Expose the port
+EXPOSE 8000
+
+# Set the entrypoint
+ENTRYPOINT ["/entrypoint.sh"]

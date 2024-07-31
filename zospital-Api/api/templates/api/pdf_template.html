@@ -15,6 +15,13 @@
             flex-direction: column;
         }
         
+        th,
+        td {
+            border: 1px solid black;
+            padding: 3px;
+            text-align: left;
+        }
+        
         main {
             flex: 1;
             overflow: hidden;
@@ -221,7 +228,26 @@
                 <div class="field">Treatment Plan:</div>
                 <div class="data">{{ treatment_plan }}</div>
                 <div class="field">Medications:</div>
-                <div class="data">{{ medications }}</div>
+                <div class="data">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Medicine</th>
+                                <th>Dosage</th>
+                                <th>Instruction</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for med in medications %}
+                            <tr>
+                                <td>{{ med.name }}</td>
+                                <td>{{ med.dosage|default_if_none:"" }}</td>
+                                <td>{{ med.instruction|default_if_none:"" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
                 <div class="field next-visit-date">Next Visit Date: {{ next_date }}</div>
                 <!-- Updated field class -->
             </div>

@@ -42,8 +42,6 @@ def pdf_form(request):
 
 def pdfview(request):
     return render(request, 'api/pdf_template.html')
-# Function to get Google Drive service
-
 
 @api_view(['POST'])
 def create_pdf_api(request):
@@ -92,7 +90,7 @@ def create_pdf_api(request):
             current_time = datetime.now(india_tz).strftime('%Y-%m-%d-%H:%M:%S')
 
             # Convert HTML to PDF using pyhtml2pdf
-            pdf_filename = f"{current_time}{patient_id.replace(' ', '')}_report.pdf"
+            pdf_filename = f"{current_time}.pdf"
             pdf_file_path = os.path.join(pdf_dir, pdf_filename)
             converter.convert(f'file:///{html_file_path}', pdf_file_path)
         except Exception as e:

@@ -1,5 +1,5 @@
 import requests
-
+import json
 # Step 1: Fetch the CSRF token
 session = requests.Session()
 get_response = session.get("https://pres-api-ap55zon22q-uc.a.run.app")  # Adjust this URL to the one that provides the CSRF token
@@ -30,7 +30,11 @@ payload = {
     "examination_findings": "Normal",
     "diagnosis": "Viral Fever",
     "treatment_plan": "Medication",
-    "medications": "Paracetamol",
+    "medications": [
+        {"name": "avvvvvvvvvvvvvvnf", "dosage": "afkjjjjjjjjjv", "instruction": "argkjjjjjjjjjjjjjjrgbet"},
+        {"name": "fdbhnnnnnnnnnnnnnnnnnnnnnnnnneabet", "dosage": "dabevb"},  # No instruction
+        {"name": "xyz"}  # No dosage, no instruction
+    ],
     "next_date": "2024-07-15",
     "footer_address": "Bhamata "
 }
